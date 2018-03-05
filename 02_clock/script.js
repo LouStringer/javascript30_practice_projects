@@ -17,35 +17,23 @@ hourHand.style.transform = `rotate(${hourDeg})`;
 minHand.style.transform = `rotate(${minDeg})`;
 secHand.style.transform = `rotate(${secDeg})`;
 
-// functions to move hands:
-function moveHourHand () {
-  hour++;
-  if (hour > 12) {
-    hour = hour - 12;
-  }
-  hourDeg = ((hour * 30) + 90) + "deg";
-  hourHand.style.transform = `rotate(${hourDeg})`;
-}
-
-function moveMinHand () {
-  min++;
-  if (min > 60) {
-    min = min - 60;
-  }
-  minDeg = ((min * 6) + 90) + "deg";
-  minHand.style.transform = `rotate(${minDeg})`;
-}
-
-function moveSecHand () {
+// function to move hands:
+function moveHands () {
   sec++;
-  if (sec > 60) {
-    sec = sec - 60;
-  }
   secDeg = ((sec * 6) + 90) + "deg";
   secHand.style.transform = `rotate(${secDeg})`;
+  if (sec > 60) {
+      sec = sec - 60;
+      min++;
+      minDeg = ((min * 6) + 90) + "deg";
+      minHand.style.transform = `rotate(${minDeg})`;
+      if (min > 60) {
+        min = min - 60;
+        hour++;
+        hourDeg = ((hour * 30) + 90) + "deg";
+        hourHand.style.transform = `rotate(${hourDeg})`;
+      };
+  };
 }
 
-// set timers to move hands
-setInterval(moveHourHand, 3600000);
-setInterval(moveMinHand, 60000);
-setInterval(moveSecHand, 1000);
+setInterval(moveHands, 1000);
