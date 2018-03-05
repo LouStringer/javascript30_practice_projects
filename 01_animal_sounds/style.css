@@ -1,25 +1,25 @@
 html {
   font-size: 10px;
-  background: linear-gradient(15deg, #00C3FF, #FFD008);
-}
-
-body,html {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background-image: url("farm.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body {
   height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
 }
 
 h1 {
   margin: 0;
   padding: 50px 50px 0 50px;
   font-family: monospace;
-  font-size: 3em;
+  font-size: 6em;
   text-align: center;
-  color: #404040;
+  color: #FF8B3C;
+  text-shadow: 0 0 .5rem #404040;
 }
 
 .keys {
