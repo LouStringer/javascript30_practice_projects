@@ -1,0 +1,27 @@
+html {
+  background: #ef32d9; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ef32d9, #89fffd); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ef32d9, #89fffd); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  margin: 0;
+  padding: 0;
+}
+
+.clock {
+  position: relative;
+  margin: 25vh auto;
+  height: 250px;
+  width: 250px;
+  border: solid 10px #89fffd;
+  border-radius: 200px;
+  box-shadow: 0 0 5px 2px #A5C7F3;
+}
+
+.hand {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  width: 50%;
+  background: #e7e7e7;
+  /* transform: rotate(6deg); */
+  transform-origin: 100%;
+}
