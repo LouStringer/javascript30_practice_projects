@@ -19,9 +19,22 @@ html {
 .hand {
   position: absolute;
   top: 50%;
-  height: 5px;
-  width: 50%;
+  right: 50%;
   background: #e7e7e7;
-  /* transform: rotate(6deg); */
   transform-origin: 100%;
+}
+
+.hour {
+  height: 7px;
+  width: 50%;
+}
+
+.minute {
+  height: 5px;
+  width: 40%;
+}
+
+.second {
+  height: 3px;
+  width: 35%;
 }
