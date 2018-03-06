@@ -22,11 +22,12 @@ html {
   right: 50%;
   background: #e7e7e7;
   transform-origin: 100%;
+  transition: 0.05s cubic-bezier(0.25, 0.1, 0.61, 2.22);
 }
 
 .hour {
   height: 7px;
-  width: 50%;
+  width: 48%;
 }
 
 .minute {
