@@ -1,0 +1,60 @@
+/* Web fonts used */
+@font-face {
+  font-family: 'Sue Ellen Francisco';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sue Ellen Francisco '), local('SueEllenFrancisco'), url(https://fonts.gstatic.com/s/sueellenfrancisco/v8/wXK3E20CsoJ9j1DDkjHcQ5ZL8xRaxru9no1P23in5H8.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v15/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/*background photos*/
+.panel1 {background-image: url(https://source.unsplash.com/ojAqKC7WS4A/500x750);}
+.panel2 {background-image: url(https://source.unsplash.com/Np1aN841iAU/500x750);}
+.panel3 {background-image: url(https://source.unsplash.com/0_xMuEbpFAQ/500x750);}
+.panel4 {background-image: url(https://source.unsplash.com/VyEie6EUuH4/500x750);}
+.panel5 {background-image: url(https://source.unsplash.com/uVxPEvrYJxA/500x750);}
+
+/*main styling*/
+* {
+  box-sizing: border-box;
+	margin: 0;
+  font-family: 'Sue Ellen Francisco', 'Open Sans', serif;
+	font-weight: 400;
+  color: #F1F3F4;
+  font-size: 1em;
+  text-shadow: 2px 2px 7px #404040;
+}
+
+.panels {
+  height: 100vh;
+  display: flex;
+  text-align: center;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 2.5rem;
+}
+
+.panel > * {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  background-position: center;
+}
+
+.panel p:nth-child(2) {
+  font-size: 4rem;
+  font-weight: 800;
+}

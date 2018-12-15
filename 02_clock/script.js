@@ -20,14 +20,14 @@ secHand.style.transform = `rotate(${secDeg})`;
 // function to move hands:
 function moveHands () {
   if (sec > 60) {
-      sec = sec - 60;
+      sec -= 60;
       min++;
       minDeg = ((min * 6) + 90) + "deg";
       minHand.style.transform = `rotate(${minDeg})`;
       hourDeg = ((hour * 30) + (min * 0.5) + 90) + "deg";
       hourHand.style.transform = `rotate(${hourDeg})`;
       if (min > 60) {
-        min = min - 60;
+        min -= 60;
         hour++;
       };
   };
