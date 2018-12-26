@@ -1,8 +1,11 @@
-const inputField = document.querySelector("input[name=searchTerm]");
+const inputField = document.querySelector('input[name=searchTerm]');
+const searchResults = document.querySelector('.search-results');
 const locationList = [];
 
+// grab the text entered into search box
 const getSearchTerm = () => document.querySelector("input[name=searchTerm]").value;
 
+// search for locations based on the search term
 const searchLocation = () => {
   const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm()}`;
   fetch(url)
@@ -13,7 +16,15 @@ const searchLocation = () => {
     })
 }
 
+// display search results
+const displaySearchResults = () => {
+  const htmlLocations = locationList.map(location => {
+      return `<li>${location.title}</li>`
+  }).join('');
+  searchResults.innerHTML = htmlLocations;
+}
+
+
 
 // write:
-// fetch function to search for location
 // event listener on inputfield to perform search on key up
