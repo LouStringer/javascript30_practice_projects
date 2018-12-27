@@ -2,14 +2,12 @@ const inputField = document.querySelector('input[name=searchTerm]');
 const searchResults = document.querySelector('#search-results');
 const locationHeading = document.querySelector('#forecast-location');
 const dailyForecastDisplay = document.querySelector('#daily-forecast');
-// const locationList = [];
-// let locationData = {};
 
 // grab the text entered into search box
-const getSearchTerm = () => document.querySelector('input[name=searchTerm]').value;
+const getSearchTerm = input => input.value;
 
-// display search results in UI
-const displaySearchResults = (data) => {
+// update HTML to show search results in UI and attach event listeners on results
+const generateSearchHtml = (data) => {
   if (data.length >=1) {
     const htmlLocations = data.map(location => {
         return `<li class='location' data-woeid=${location.woeid}>${location.title}</li>`
@@ -23,24 +21,22 @@ const displaySearchResults = (data) => {
   }
 }
 
-// search for locations based on the search term
+// search for and display locations based on the search term
 const searchLocation = () => {
-  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm()}`;
+  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm(inputField)}`;
   fetch(url)
     .then(response => response.json())
-    .then(data => {
-      displaySearchResults(data);
-      // locationData = data;
-    })
+    .then(data => {generateSearchHtml(data)})
 }
 
-// event listener to run search and display results when text entered in box
+// event listener to run search and display results when text entered in input box
 inputField.addEventListener('input', () => {
   inputField.value.length > 1 ? searchLocation() : searchResults.innerHTML = '';
 });
 
-// fetch weather forecast using woeid of clicked on function
+// fetch weather forecast using woeid of search result location clicked on
 const fetchWeather = (event) => {
+    searchResults.innerHTML = '';
     const woeid = event.currentTarget.getAttribute('data-woeid');
     const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`;
     fetch(url)
@@ -48,7 +44,24 @@ const fetchWeather = (event) => {
       .then(data => {console.log(data); displayForecast(data)})
 }
 
-// to include: day | min temp | max temp | weather + icon | wind speed
+// format and display the daily forecasts
+const updateLocationHeading = (data) => {
+  locationHeading.innerHTML = `weather for ${data.title}`;
+}
+
+const generateForecastHtml = forecasts => {
+  const htmlForecasts = forecasts.map(day => {
+      return `<div class="day day${day.dayNumber}">
+                <p>day ${day.dayNumber}</p>
+                <p>weather conditions: ${day.weather}</p>
+                <p>temperature: ${day.predictedTemp}°c</p>
+                <p>range: ${day.minTemp}°c to ${day.maxTemp}°c</p>
+                <p>wind speed: ${day.windSpeed}mph</p>
+              </div>`
+  }).join('');
+  dailyForecastDisplay.innerHTML = htmlForecasts;
+}
+
 const displayForecast = data => {
   const formatForecastDetails = data.consolidated_weather.map(day => {
     return {
@@ -62,21 +75,4 @@ const displayForecast = data => {
   });
   updateLocationHeading(data);
   generateForecastHtml(formatForecastDetails);
-}
-
-const updateLocationHeading = (data) => {
-  locationHeading.innerHTML = `weather for ${data.title}`;
-}
-
-const generateForecastHtml = forecasts => {
-  const htmlForecasts = forecasts.map(day => {
-      return `<div class="day day${day.dayNumber}">
-                <p>day ${day.dayNumber}</p>
-                <p>weather conditions: ${day.weather}</p>
-                <p>temperature: ${day.predictedTemp}°c</p>
-                <p>range: ${day.minTemp}°c to ${day.maxTemp}°c</p>
-                <p>wind speed: ${day.windSpeed}</p>
-              </div>`
-  }).join('');
-  dailyForecastDisplay.innerHTML = htmlForecasts;
 }
