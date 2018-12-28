@@ -1,0 +1,79 @@
+/* web fonts used */
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(https://fonts.gstatic.com/s/josefinsans/v12/Qw3aZQNVED7rKGKxtqIqX5EUDXx4Vn8sig.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Josefin Slab';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Slab Regular'), local('JosefinSlab-Regular'), url(https://fonts.gstatic.com/s/josefinslab/v8/lW-5wjwOK3Ps5GSJlNNkMalnqg6vBMjoPg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Major Mono Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Major Mono Display Regular'), local('MajorMonoDisplay-Regular'), url(https://fonts.gstatic.com/s/majormonodisplay/v1/RWmVoLyb5fEqtsfBX9PDZIGr2tFubRh7DXeRAHRfwg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*main styling*/
+* {
+  box-sizing: border-box;
+  background: #f7f7f7;
+	margin: 0;
+  /* border: 1px solid red; */
+  font-family: 'Josefin Sans', sans-serif;
+	font-weight: 400;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 20px;
+  font-family: 'Major Mono Display', serif;
+  font-size: 2em;
+  text-align: center;
+}
+
+#search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+#search>* {
+  margin: 10px;
+  padding: 0px;
+  text-align: center;
+}
+
+#search input {
+  margin: 0px 10px;
+  border: 1px solid #393a3d;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#search input:focus {
+  outline: none;
+  box-shadow: 2px 2px 3px #8f9299;
+}
+
+#search li {
+  list-style-type: none;
+  padding: 5px;
+}
+
+#search li:focus, #search li:hover {
+  outline: none;
+  border: 1px solid #393a3d;
+  border-radius: 5px;
+}

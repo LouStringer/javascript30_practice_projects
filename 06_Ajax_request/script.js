@@ -14,7 +14,7 @@ const generateSearchHtml = (data) => {
     }).join('');
     searchResults.innerHTML = htmlLocations;
     document.querySelectorAll('.location').forEach(location => {
-      location.addEventListener('click', fetchWeather);
+      // location.addEventListener('click', fetchWeather);
     });
   } else {
     searchResults.innerHTML = `<li>no results found</li>`;
@@ -54,11 +54,16 @@ const updateLocationHeading = (data) => {
 const generateForecastHtml = forecasts => {
   const htmlForecasts = forecasts.map(day => {
       return `<div class="day day${day.dayNumber}">
-                <p>day ${day.dayNumber}</p>
-                <p>weather conditions: ${day.weather}</p>
-                <p>temperature: ${day.predictedTemp}°c</p>
-                <p>range: ${day.minTemp}°c to ${day.maxTemp}°c</p>
-                <p>wind speed: ${day.windSpeed}mph</p>
+                <div class="weather-conditions">
+                  <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg" alt="icon displaying weather conditions"/>
+                  <p>${day.weather}</p>
+                </div>
+                <div class="day-temp-wind">
+                  <p>day ${day.dayNumber}</p>
+                  <p>${day.predictedTemp}°c</p>
+                  <p>(${day.minTemp}°c to ${day.maxTemp}°c)</p>
+                  <p>wind ${day.windSpeed}mph</p>
+                </div>
               </div>`
   }).join('');
   dailyForecastDisplay.innerHTML = htmlForecasts;
@@ -69,6 +74,7 @@ const displayForecast = data => {
     return {
       dayNumber: data.consolidated_weather.indexOf(day) + 1,
       weather: day.weather_state_name.toLowerCase(),
+      weatherCode: day.weather_state_abbr,
       minTemp: Math.round(day.min_temp),
       maxTemp: Math.round(day.max_temp),
       predictedTemp: Math.round(day.the_temp),
