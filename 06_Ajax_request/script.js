@@ -27,6 +27,7 @@ const searchLocation = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {generateSearchHtml(data)})
+    .catch(error => console.log('failure in fetching matching locations'))
 }
 
 // event listener to run search and display results when text entered in input box
@@ -42,6 +43,7 @@ const fetchWeather = (event) => {
     fetch(url)
       .then(response => response.json())
       .then(data => {console.log(data); displayForecast(data)})
+      .catch(error => console.log('failure in fetching forecasts'))
 }
 
 // format and display the daily forecasts
