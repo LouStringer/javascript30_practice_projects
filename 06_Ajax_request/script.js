@@ -10,11 +10,11 @@ const getSearchTerm = input => input.value;
 const generateSearchHtml = (data) => {
   if (data.length >=1) {
     const htmlLocations = data.map(location => {
-        return `<li class='location' data-woeid=${location.woeid}>${location.title}</li>`
+        return `<button class='location' data-woeid=${location.woeid}>${location.title}</button>`
     }).join('');
     searchResults.innerHTML = htmlLocations;
     document.querySelectorAll('.location').forEach(location => {
-      // location.addEventListener('click', fetchWeather);
+      location.addEventListener('click', fetchWeather);
     });
   } else {
     searchResults.innerHTML = `<li>no results found</li>`;

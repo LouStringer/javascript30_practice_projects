@@ -67,12 +67,14 @@ h1 {
   box-shadow: 2px 2px 3px #8f9299;
 }
 
-#search li {
-  list-style-type: none;
+#search button {
+  display: block;
+  width: 100%;
+  border: none;
   padding: 5px;
 }
 
-#search li:focus, #search li:hover {
+#search button:focus, #search button:hover {
   outline: none;
   border: 1px solid #393a3d;
   border-radius: 5px;
