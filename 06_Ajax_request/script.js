@@ -1,7 +1,7 @@
 const inputField = document.querySelector('input[name=searchTerm]');
 const searchResults = document.querySelector('#search-results');
 const locationHeading = document.querySelector('#forecast-location');
-const dailyForecastDisplay = document.querySelector('#daily-forecast');
+const dailyForecastDisplay = document.querySelector('#daily-forecasts');
 
 // grab the text entered into search box
 const getSearchTerm = input => input.value;
@@ -54,12 +54,12 @@ const updateLocationHeading = (data) => {
 const generateForecastHtml = forecasts => {
   const htmlForecasts = forecasts.map(day => {
       return `<div class="day day${day.dayNumber}">
-                <div class="weather-conditions">
-                  <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg" alt="icon displaying weather conditions"/>
-                  <p>${day.weather}</p>
+                <div class="weather-icon">
+                  <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg" alt="weather conditions icon"/>
                 </div>
-                <div class="day-temp-wind">
+                <div class="weather-info">
                   <p>day ${day.dayNumber}</p>
+                  <p>${day.weather}</p>
                   <p>${day.predictedTemp}°c</p>
                   <p>(${day.minTemp}°c to ${day.maxTemp}°c)</p>
                   <p>wind ${day.windSpeed}mph</p>
