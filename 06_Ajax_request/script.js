@@ -7,12 +7,9 @@ const locationHeading = document.querySelector('#forecast-location');
 const dailyForecastDisplay = document.querySelector('#daily-forecasts');
 const resetButton = document.querySelector('#reset');
 
-// grab the text entered into search box
-const getSearchTerm = input => input.value;
-
 // search for and display locations based on the search term
 const searchLocation = () => {
-  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm(inputField)}`;
+  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${inputField.value}`;
   fetch(url)
     .then(response => response.json())
     .then(data => {generateSearchHtml(data)})
@@ -52,42 +49,31 @@ const fetchWeather = (event) => {
 }
 
 // format and display the daily forecasts
-const updateLocationHeading = (data) => {
+const updateLocationHeading = data => {
   locationHeading.innerHTML = `weather for ${data.title}`;
 }
 
-const generateForecastHtml = forecasts => {
-  const htmlForecasts = forecasts.map(day => {
-      return `<div class="day day${day.dayNumber}">
+const generateForecastHtml = data => {
+  const htmlForecasts = data.consolidated_weather.map(day => {
+      return `<div class="day">
                 <div class="weather-icon">
-                  <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg" alt="weather conditions icon"/>
+                  <img src="https://www.metaweather.com/static/img/weather/${day.weather_state_abbr}.svg" alt="weather conditions icon"/>
                 </div>
                 <div class="weather-info">
-                  <p class="day-number">day ${day.dayNumber}</p>
-                  <p>${day.weather}</p>
-                  <p>${day.predictedTemp}°c</p>
-                  <p>(${day.minTemp}°c to ${day.maxTemp}°c)</p>
-                  <p>wind ${day.windSpeed}mph</p>
+                  <p class="day-number">day ${data.consolidated_weather.indexOf(day) + 1}</p>
+                  <p>${day.weather_state_name.toLowerCase()}</p>
+                  <p>${Math.round(day.the_temp)}°c</p>
+                  <p>(${Math.round(day.min_temp)}°c to ${Math.round(day.max_temp)}°c)</p>
+                  <p>wind ${Math.round(day.wind_speed)}mph</p>
                 </div>
               </div>`
   }).join('');
   dailyForecastDisplay.innerHTML = htmlForecasts;
-}
+};
 
 const displayForecast = data => {
-  const formatForecastDetails = data.consolidated_weather.map(day => {
-    return {
-      dayNumber: data.consolidated_weather.indexOf(day) + 1,
-      weather: day.weather_state_name.toLowerCase(),
-      weatherCode: day.weather_state_abbr,
-      minTemp: Math.round(day.min_temp),
-      maxTemp: Math.round(day.max_temp),
-      predictedTemp: Math.round(day.the_temp),
-      windSpeed: Math.round(day.wind_speed)
-    };
-  });
   updateLocationHeading(data);
-  generateForecastHtml(formatForecastDetails);
+  generateForecastHtml(data);
   resetButton.addEventListener('click', reset);
   searchSection.classList.add('hidden');
   forecastSection.classList.remove('hidden')
