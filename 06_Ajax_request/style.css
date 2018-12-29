@@ -24,19 +24,21 @@
 }
 
 /*main styling*/
-body {
-  min-height: 100vh;
-}
-
 * {
   box-sizing: border-box;
   background: #f7f7f7;
 	margin: 0;
-  /* border: 1px solid red; */
   font-family: 'Josefin Sans', sans-serif;
 	font-weight: 400;
   font-size: 1.2rem;
   text-align: center;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 h1 {
@@ -47,16 +49,14 @@ h1 {
   text-align: center;
 }
 
-/* main {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  height: 100%;
+main {
+  flex: 5;
 }
 
-main>* {
-  flex: 1;
-} */
+#thanks {
+  font-size: 0.6em;
+  margin: 20px;
+}
 
 /* hidden sections */
 #search.hidden, #forecast.hidden {
