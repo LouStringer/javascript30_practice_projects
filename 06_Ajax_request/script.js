@@ -1,10 +1,28 @@
+// get all DOM elements
+const searchSection = document.querySelector('#search');
 const inputField = document.querySelector('input[name=searchTerm]');
 const searchResults = document.querySelector('#search-results');
+const forecastSection = document.querySelector('#forecast');
 const locationHeading = document.querySelector('#forecast-location');
 const dailyForecastDisplay = document.querySelector('#daily-forecasts');
+const resetButton = document.querySelector('#reset');
 
 // grab the text entered into search box
 const getSearchTerm = input => input.value;
+
+// search for and display locations based on the search term
+const searchLocation = () => {
+  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm(inputField)}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {generateSearchHtml(data)})
+    .catch(error => searchResults.innerHTML = `<p>oh no! something messed up, please try againn</p>`)
+}
+
+// event listener to run search and display results when text entered in input box
+inputField.addEventListener('input', () => {
+  inputField.value.length > 1 ? searchLocation() : searchResults.innerHTML = '';
+});
 
 // update HTML to show search results in UI and attach event listeners on results
 const generateSearchHtml = (data) => {
@@ -17,33 +35,20 @@ const generateSearchHtml = (data) => {
       location.addEventListener('click', fetchWeather);
     });
   } else {
-    searchResults.innerHTML = `<li>no results found</li>`;
+    searchResults.innerHTML = `<p>no results found</p>`;
   }
 }
 
-// search for and display locations based on the search term
-const searchLocation = () => {
-  const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${getSearchTerm(inputField)}`;
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {generateSearchHtml(data)})
-    .catch(error => console.log('failure in fetching matching locations'))
-}
-
-// event listener to run search and display results when text entered in input box
-inputField.addEventListener('input', () => {
-  inputField.value.length > 1 ? searchLocation() : searchResults.innerHTML = '';
-});
-
 // fetch weather forecast using woeid of search result location clicked on
 const fetchWeather = (event) => {
+    inputField.value = 'fetching weather!';
     searchResults.innerHTML = '';
     const woeid = event.currentTarget.getAttribute('data-woeid');
     const url = `http://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}`;
     fetch(url)
       .then(response => response.json())
-      .then(data => {console.log(data); displayForecast(data)})
-      .catch(error => console.log('failure in fetching forecasts'))
+      .then(data => displayForecast(data))
+      .catch(error => dailyForecastDisplay.innerHTML = `<p>oh no! something messed up, please try again</p>`)
 }
 
 // format and display the daily forecasts
@@ -58,7 +63,7 @@ const generateForecastHtml = forecasts => {
                   <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg" alt="weather conditions icon"/>
                 </div>
                 <div class="weather-info">
-                  <p>day ${day.dayNumber}</p>
+                  <p class="day-number">day ${day.dayNumber}</p>
                   <p>${day.weather}</p>
                   <p>${day.predictedTemp}°c</p>
                   <p>(${day.minTemp}°c to ${day.maxTemp}°c)</p>
@@ -83,4 +88,17 @@ const displayForecast = data => {
   });
   updateLocationHeading(data);
   generateForecastHtml(formatForecastDetails);
+  resetButton.addEventListener('click', reset);
+  searchSection.classList.add('hidden');
+  forecastSection.classList.remove('hidden')
+}
+
+// reset & search again
+const reset = () => {
+  inputField.value = '';
+  searchResults.innerHTML = '';
+  locationHeading.innerHTML = '';
+  dailyForecastDisplay.innerHTML = '';
+  searchSection.classList.remove('hidden');
+  forecastSection.classList.add('hidden')
 }

@@ -10,83 +10,15 @@
   <body>
     <h1>bRollY or suNNies?</h1>
     <main>
-      <section id="search">
+      <section id="search" class="">
         <label>show me the weather in<input type="text" name="searchTerm" placeholder="2+ letters" value=""></label>
         <div id="search-results">
-          <!-- for offline dev -->
-          <button class='location' data-woeid=31>test</button>
-          <button class='location' data-woeid=31>test</button>
-          <button class='location' data-woeid=31>test</button>
-          <button class='location' data-woeid=31>test</button>
-          <button class='location' data-woeid=31>test</button>
-          <button class='location' data-woeid=31>test</button>
         </div>
       </section>
-      <section id="forecast" class='hidden'>
-        <h3 id="forecast-location">forecast</h3>
-        <div id="daily-forecasts">
-          <!-- for offline dev -->
-          <div class="day day1">
-            <div class="weather-icon">
-              <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg"/>
-            </div>
-            <div class="weather-info">
-              <p class="day-number">day 1</p>
-              <p>cloudy</p>
-              <p>7°c</p>
-              <p>(4°c to -10°c)</p>
-              <p>wind 3mph</p>
-            </div>
-          </div>
-          <div class="day day2">
-            <div class="weather-icon">
-              <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg"/>
-            </div>
-            <div class="weather-info">
-              <p class="day-number">day 2</p>
-              <p>thunderstorm</p>
-              <p>7°c</p>
-              <p>(4°c to -10°c)</p>
-              <p>wind 3mph</p>
-            </div>
-          </div>
-          <div class="day day3">
-            <div class="weather-icon">
-              <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg"/>
-            </div>
-            <div class="weather-info">
-              <p class="day-number">day 3</p>
-              <p>heavy rain</p>
-              <p>-7°c</p>
-              <p>(4°c to -10°c)</p>
-              <p>wind 3mph</p>
-            </div>
-          </div>
-          <div class="day day4">
-            <div class="weather-icon">
-              <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg"/>
-            </div>
-            <div class="weather-info">
-              <p class="day-number">day 4</p>
-              <p>clear</p>
-              <p>17°c</p>
-              <p>(14°c to 20°c)</p>
-              <p>wind 3mph</p>
-            </div>
-          </div>
-          <div class="day day5">
-            <div class="weather-icon">
-              <img src="https://www.metaweather.com/static/img/weather/${day.weatherCode}.svg"/>
-            </div>
-            <div class="weather-info">
-              <p class="day-number">day 5</p>
-              <p>light cloud</p>
-              <p>7°c</p>
-              <p>(4°c to -10°c)</p>
-              <p>wind 3mph</p>
-            </div>
-          </div>
-        </div>
+      <section id="forecast" class="hidden">
+        <button id="reset">search again</button>
+        <h3 id="forecast-location"></h3>
+        <div id="daily-forecasts"></div>
       </section>
     </main>
   </body>
