@@ -1,0 +1,12 @@
+.list {
+  width: 35%;
+  margin: 50px auto;
+}
+
+.item {
+  margin: 5px;
+}
+
+p {
+  display: inline;
+}
